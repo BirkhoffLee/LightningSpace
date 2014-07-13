@@ -1,2 +1,0 @@
-RewriteEngine on
-RewriteRule download\/([a-zA-Z0-9\-]*) LS-download.php?argu=$1 [NC,L]
