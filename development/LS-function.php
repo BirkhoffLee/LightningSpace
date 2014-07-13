@@ -15,7 +15,7 @@ class LightningSpace{
     *
     * @return boolean
     */
-  function mkdirs($dir){
+  public function mkdirs($dir){
     return is_dir($dir) or (mkdirs(dirname($dir)) and mkdir($dir,0755));
   }
 
@@ -27,7 +27,7 @@ class LightningSpace{
     *
     * @return void
     */
-  function deleteDir($dirPath) {
+  public function deleteDir($dirPath) {
       if (! is_dir($dirPath)) {
           die("$dirPath must be a directory");
       }
@@ -53,7 +53,7 @@ class LightningSpace{
     *
     * @return void
     */
-  function CheckExpire($dir) {
+  public function CheckExpire($dir) {
       static $alldirs = array();
       $dirs = glob($dir . '/*', GLOB_ONLYDIR);
       if (count($dirs) > 0) {
@@ -78,7 +78,7 @@ class LightningSpace{
     *
     * @return bool
     */
-  function CheckSafe($file){
+  public function CheckSafe($file){
   	if (pathinfo($file, PATHINFO_EXTENSION) == 'php'){
   		return false;
   	}
@@ -102,13 +102,38 @@ class LightningSpace{
     *
     * @return string
     */
-  function RandomString($length){
+  public function RandomString($length){
     $pattern = "1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz";
     $key = '';
     for($i=0;$i<$length;$i++){
       $key .= $pattern{rand(0,35)};
     }
     return $key;
+  }
+
+
+  /**
+    * 返回 templet 的指定檔案內容
+    *
+    * @param  string  $file 檔案
+    *
+    * @return string
+    */
+  public function ReadTemplet($file){
+    return readfile(LS-TEMPLET-DIR . "/$file");
+  }
+
+
+  /**
+    * 返回 templet 的指定檔案內容
+    *
+    * @param  string  $file  檔案
+    * @param  array   $array 參數
+    *
+    * @return string
+    */
+  public function Templet($file, $array){
+    return $m->render(self::ReadTemplet(LS-TEMPLET-DIR . "/$file"), $array);
   }
 
 }

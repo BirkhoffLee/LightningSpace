@@ -17,6 +17,11 @@ $LightningSpace = new LightningSpace;
 $LightningSpace->CheckExpire(dirname(__FILE__) . LS-DOWNLOAD-TEMP);
 define(LS-UPLOADED, false);
 
+global $m;
+require 'Mustache/Autoloader.php';
+Mustache_Autoloader::register();
+$m = new Mustache_Engine;
+
 /**
  * Process Uploading
 */
