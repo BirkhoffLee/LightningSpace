@@ -38,7 +38,7 @@ define('LS-FILE-SIZE', '');
  *
  * NOT RECOMMENDED REPLACEING.
  */
-define('LS-DOWNLOAD-TEMP', '/downloading');
+define('LS-DOWNLOAD-TEMP', 'downloading');
 
 /**
  * Defines the directory which the files save.
@@ -48,10 +48,3 @@ define('LS-DOWNLOAD-TEMP', '/downloading');
  * NOT RECOMMENDED REPLACEING.
  */
 define('LS-FILE-SAVE', 'FileSystem/');
-
-//------------------------------------------------------------
-
-/**
- * Change something.
-*/
-define('LS-DOWNLOAD-TEMP', LS-ROOT . LS-DOWNLOAD-TEMP);

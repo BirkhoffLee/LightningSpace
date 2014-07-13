@@ -16,7 +16,7 @@ class LightningSpace{
     * @return boolean
     */
   function mkdirs($dir){
-    return is_dir($dir) or (mkdirs(dirname($dir)) and mkdir($dir,0777));
+    return is_dir($dir) or (mkdirs(dirname($dir)) and mkdir($dir,0755));
   }
 
 
@@ -37,7 +37,7 @@ class LightningSpace{
       $files = glob($dirPath . '*', GLOB_MARK);
       foreach ($files as $file) {
           if (is_dir($file)) {
-              deleteDir($file);
+              self::deleteDir($file);
           } else {
               unlink($file);
           }
@@ -59,13 +59,13 @@ class LightningSpace{
       if (count($dirs) > 0) {
           foreach ($dirs as $d) $alldirs[] = $d;
       }
-      foreach ($dirs as $dir) checkexpire($dir);
+      foreach ($dirs as $dir) self::CheckExpire($dir);
       foreach ($alldirs as $filedir){
           if(file_exists($filedir . '/expire.txt')){
               $handlec = fopen($filedir . '/expire.txt', "r");
               $contentsc = fread($handlec, filesize($filedir . '/expire.txt'));
               fclose($handlec);
-              if(time() > $contentsc) deleteDir($filedir);
+              if(time() > $contentsc) self::deleteDir($filedir);
           }
       }
   }

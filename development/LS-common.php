@@ -34,7 +34,7 @@ if (isset($_POST['action'])){
 						)));
 
 					/*	移動檔案至特定資料夾、建立過期檢測檔案	*/
-					mkdirs(LS-FILE-SAVE . $key);
+					$LightningSpace->mkdirs(LS-FILE-SAVE . $key);
 					move_uploaded_file($_FILES["file"]["tmp_name"], LS-FILE-SAVE . $key . '/' . $_FILES["file"]["name"]);
 
 					/*	記錄檔案詳細資訊	*/
