@@ -15,7 +15,7 @@ if(LS_UPLOADED) {
 	$FileSize = $LS_UPLOADED_FILE['FileSize'];
 	$FileKey = $LS_UPLOADED_FILE['FileKey'];
 	echo $LightningSpace->Templet(
-		'uploaded.html',
+		'uploaded',
 		array(
 			'SiteName' => LS_SITE_NAME,
 			'Description' => LS_DESCRIPTION,
@@ -55,7 +55,7 @@ if(LS_ERROR_CHECK) {
 			break ;
 	}
 	echo $LightningSpace->Templet(
-		'uploaderr.html',
+		'uploaderr',
 		array(
 			'SiteName' => LS_SITE_NAME,
 			'Description' => LS_DESCRIPTION,
@@ -66,7 +66,7 @@ if(LS_ERROR_CHECK) {
 }
 
 echo $LightningSpace->Templet(
-	'index.html',
+	'index',
 	array(
 		'SiteName' => LS_SITE_NAME,
 		'Description' => LS_DESCRIPTION

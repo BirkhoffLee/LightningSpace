@@ -7,6 +7,23 @@
   @License  http://b3h.xyz/License/LS
 */
 class LightningSpace{
+
+   /**
+    * 初始化模板系統
+    *
+    * @return void
+    */
+  public static function mustache_init(){
+    Mustache_Autoloader::register();
+    $options =  array('extension' => '.html');
+
+    global $m;
+    $m = new Mustache_Engine(array(
+        'loader' => new Mustache_Loader_FilesystemLoader(LS_TEMPLET_DIR, $options),
+    ));
+  }
+
+
    /**
     * 建立多級資料夾
     *
@@ -105,28 +122,14 @@ class LightningSpace{
   /**
     * 返回 templet 的指定檔案內容
     *
-    * @param  string  $file 檔案
-    *
-    * @return string
-    */
-  public static function ReadTemplet($file){
-    return readfile(LS_TEMPLET_DIR . "/$file");
-  }
-
-
-  /**
-    * 返回 templet 的指定檔案內容
-    *
     * @param  string  $file  檔案
     * @param  array   $array 參數
     *
     * @return string
     */
   public static function Templet($file, $array){
-    Mustache_Autoloader::register();
-    $m = new Mustache_Engine;
-    var_dump($array);
-    return $m->render(self::ReadTemplet($file), $array);
+    global $m;
+    return $m->render($file, $array);
   }
 
 }

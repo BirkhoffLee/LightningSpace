@@ -14,6 +14,7 @@ require 'Mustache/Autoloader.php';
 
 global $LightningSpace;
 $LightningSpace = new LightningSpace;
+$LightningSpace->mustache_init();
 $LightningSpace->CheckExpire(dirname(__FILE__) . LS_DOWNLOAD_TEMP);
 define('LS_UPLOADED', false);
 define('LS_ERROR_CHECK', false);
