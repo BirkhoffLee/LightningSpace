@@ -51,7 +51,11 @@ if (isset($_POST['action'])){
 						'Filekey' => $webkey,
 					};
 					define(LS-UPLOADED, true);
+			} else {
+				define(LS-ERROR, 'InvalidFileType');
 			}
+		} else {
+			define(LS-ERROR, $_FILES["file"]["error"]);
 		}
 	}
 }
