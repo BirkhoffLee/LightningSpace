@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>{{SiteName}}</title>
-  <meta charset="utf-8">
 <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
 <style>
 	body {
@@ -21,14 +20,14 @@
 <body>
 	<div class="container">
         <div class="jumbotron">
-		<div class="alert alert-success">檔案成功地上傳，感謝您的使用。
-		 </div>
+		<div class="alert-dismissable alert alert-success">檔案成功地上傳，感謝您的使用。
+		  <button type="button" class="close" data-dismiss="alert">x</button></div>
             <h1 class="title">{{SiteName}} <small>{{Description}}</small></h1>
             <p id='content'>
             	<h2>{{FileName}}</h2><br />
             	檔案類型: {{FileType}}<br />
             	檔案大小: {{FileSize}}<br />
-            	檔案外鏈: http://{{ SiteURL }}{{ FileKey }}<br />
+            	檔案外鏈: http://{{SiteURL}}/download/{{FileKey}}<br />
             	<br />
             	
             </p>

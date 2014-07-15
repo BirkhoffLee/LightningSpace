@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W5C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>{{SiteName}}</title> <meta charset="utf-8">
+<title>{{SiteName}}</title>
 <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
 <style>
 	body {
@@ -20,12 +20,11 @@
 <body>
 	<div class="container">
         <div class="jumbotron">
-		<div class="alert alert-danger">檔案「{{FileName}}」上傳失敗，因為 {{ErrInfo}}</div>
+		<div class="alert alert-danger">檔案上傳失敗！</div>
             <h1 class="title">{{SiteName}} <small>{{Description}}</small></h1>
 			
             <p id='content'>
-            	<h3><span class="label label-danger">錯誤</span> {{FileName}}<h3><br />
-				{{ ErrInfo }}
+            	<h3><span class="label label-danger">Error:</span> {{ErrInfo}}<h3><br />
             	<br />
             </p>
         </div>
