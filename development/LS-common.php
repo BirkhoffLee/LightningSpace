@@ -25,7 +25,6 @@ if (isset($_POST['action'])){
 	if ($_POST['action'] == 'upload'){
 		if ($_FILES["file"]["error"] == 0){
 			if ($LightningSpace->CheckSafe($_FILES["file"]["name"])){
-
 				 	/*	產生檔案儲存金鑰	*/
 					$key = $LightningSpace->RandomString(8) . '-' . rand(0,300000);
 
