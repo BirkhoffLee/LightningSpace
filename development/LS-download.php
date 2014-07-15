@@ -26,25 +26,25 @@ if(!$key or !$file){
 }
 
 /* 防盜鏈臨時資料夾名稱 */
-$folder = LS-DOWNLOAD-TEMP . "uid-" . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '/' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000);
+$folder = LS_DOWNLOAD_TEMP . "uid-" . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '/' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000);
 
 /* 建立臨時資料夾、index.php */
 $LightningSpace->mkdirs($folder);
 copy("data/index.php-FORBIDDEN", "$folder/index.php");
 chmod("$folder/index.php", 0755);
 
-$fp = fopen(dirname(__FILE__) . "$folder/index.php", 'r');
-$contents = fread($fp, filesize(dirname(__FILE__) . "$folder/index.php"));
+$fp = fopen(LS_ROOT . "/$folder/index.php", 'r');
+$contents = fread($fp, filesize(LS_ROOT . "/$folder/index.php"));
 fclose($fp);
 
 $contents = str_replace('@XDREPLACEME@',$file,$contents);
 
-$fp = fopen(dirname(__FILE__) . "$folder/index.php", 'w');
+$fp = fopen(LS_ROOT . "/$folder/index.php", 'w');
 fwrite($fp, $contents);
 fclose($fp);
 
 /* 複製原始檔案到臨時資料夾 */
-copy(LS-FILE-SAVE . "$key/$file", "$folder/file");
+copy(LS_FILE_SAVE . "$key/$file", "$folder/file");
 chmod("$folder/file", 0755);
 
 /* 建立過期檢測檔案 */

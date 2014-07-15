@@ -11,38 +11,38 @@
  * Defines the script root directory.
  * DO NOT CHANGE THIS.
  */
-define('LS-ROOT', dirname(__FILE__));
+define('LS_ROOT', dirname(__FILE__));
 
 /**
  * Defines if in debug mode.
  * NO REPLACEING!
  */
-define('LS-DEBUG', true);
+define('LS_DEBUG', true);
 
 /**
  * Defines the site name.
  * Please replace "LightningSpace"
  */
-define('LS-SITE-NAME', 'LightningSpace');
+define('LS_SITE_NAME', 'LightningSpace');
 
 /**
  * Defines the site's description.
  * Please replace "You've never seen a great network disk system."
  */
-define('LS-SITE-NAME', "You've never seen a great network disk system.");
+define('LS_DESCRIPTION', "You've never seen a great network disk system.");
 
 /**
  * Defines the templet folder that I will use.
  * Please replace "default"
  */
-define('LS-TEMPLET-NAME', 'default');
+define('LS_TEMPLET_NAME', 'default');
 
 /**
  * Defines the largest file size(bytes) can be uploaded.
  * Default: 500 MB(524288000 bytes)
  * Please replace "524288000"
  */
-define('LS-FILE-SIZE', '524288000');
+define('LS_FILE_SIZE', '524288000');
 
 /**
  * Defines the directory which the tempory file save.
@@ -51,7 +51,7 @@ define('LS-FILE-SIZE', '524288000');
  *
  * NOT RECOMMENDED REPLACEING.
  */
-define('LS-DOWNLOAD-TEMP', 'downloading');
+define('LS_DOWNLOAD_TEMP', 'downloading');
 
 /**
  * Defines the directory which the files save.
@@ -60,11 +60,11 @@ define('LS-DOWNLOAD-TEMP', 'downloading');
  *
  * NOT RECOMMENDED REPLACEING.
  */
-define('LS-FILE-SAVE', 'FileSystem/');
+define('LS_FILE_SAVE', 'FileSystem/');
 
 
 //------------------------------------------------
 /**
  * DO NOT TOUCH !
 */
-define('LS-TEMPLET-DIR', 'templet/' . LS-TEMPLET-NAME);
+define('LS_TEMPLET_DIR', 'templet/' . LS_TEMPLET_NAME);

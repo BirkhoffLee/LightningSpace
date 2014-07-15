@@ -6,7 +6,6 @@
   @see      http://b3h.xyz
   @License  http://b3h.xyz/License/LS
 */
-
 class LightningSpace{
    /**
     * 建立多級資料夾
@@ -15,7 +14,7 @@ class LightningSpace{
     *
     * @return boolean
     */
-  public function mkdirs($dir){
+  public static function mkdirs($dir){
     return is_dir($dir) or (mkdirs(dirname($dir)) and mkdir($dir,0755));
   }
 
@@ -27,7 +26,7 @@ class LightningSpace{
     *
     * @return void
     */
-  public function deleteDir($dirPath) {
+  public static function deleteDir($dirPath) {
       if (! is_dir($dirPath)) {
           die("$dirPath must be a directory");
       }
@@ -53,7 +52,7 @@ class LightningSpace{
     *
     * @return void
     */
-  public function CheckExpire($dir) {
+  public static function CheckExpire($dir) {
       static $alldirs = array();
       $dirs = glob($dir . '/*', GLOB_ONLYDIR);
       if (count($dirs) > 0) {
@@ -78,20 +77,11 @@ class LightningSpace{
     *
     * @return bool
     */
-  public function CheckSafe($file){
-  	if (pathinfo($file, PATHINFO_EXTENSION) == 'php'){
-  		return false;
-  	}
-  	if (pathinfo($file, PATHINFO_EXTENSION) == 'asp'){
-  		return false;
-  	}
-  	if (pathinfo($file, PATHINFO_EXTENSION) == 'jsp'){
-  		return false;
-  	}
-  	if (pathinfo($file, PATHINFO_EXTENSION) == 'cgi'){
-  		return false;
-  	}
-  	return true;
+  public static function CheckSafe($file){
+    $ext = pathinfo($file, PATHINFO_EXTENSION);
+    if ($ext == 'php' or $ext == 'asp' or $ext == 'aspx' or $ext == 'php' or $ext == 'jsp' or $ext == 'cgi'){
+      return false;
+    } else return true;
   }
 
 
@@ -102,7 +92,7 @@ class LightningSpace{
     *
     * @return string
     */
-  public function RandomString($length){
+  public static function RandomString($length){
     $pattern = "1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz";
     $key = '';
     for($i=0;$i<$length;$i++){
@@ -119,8 +109,8 @@ class LightningSpace{
     *
     * @return string
     */
-  public function ReadTemplet($file){
-    return readfile(LS-TEMPLET-DIR . "/$file");
+  public static function ReadTemplet($file){
+    return readfile(LS_TEMPLET_DIR . "/$file");
   }
 
 
@@ -132,8 +122,11 @@ class LightningSpace{
     *
     * @return string
     */
-  public function Templet($file, $array){
-    return $m->render(self::ReadTemplet(LS-TEMPLET-DIR . "/$file"), $array);
+  public static function Templet($file, $array){
+    Mustache_Autoloader::register();
+    $m = new Mustache_Engine;
+    var_dump($array);
+    return $m->render(self::ReadTemplet($file), $array);
   }
 
 }
