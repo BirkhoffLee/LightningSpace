@@ -68,7 +68,7 @@ if(LS_ERROR_CHECK) {
 echo $LightningSpace->Templet(
 	'index.html',
 	array(
-		'sitename' => LS_SITE_NAME,
-		'description' => LS_DESCRIPTION
+		'SiteName' => LS_SITE_NAME,
+		'Description' => LS_DESCRIPTION
 	)
 );
