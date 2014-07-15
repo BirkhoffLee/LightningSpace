@@ -1,11 +1,12 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W5C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>{{ SiteName }}</title>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<title>{{SiteName}}</title> <meta charset="utf-8">
+<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
 <style>
 	body {
 		margin-top: 45px;
+		font-family:"å¾®è»Ÿæ­£é»‘é«”"
 	}
 	input {
 	    border: 1px solid #BBBBBB;
@@ -19,12 +20,13 @@
 <body>
 	<div class="container">
         <div class="jumbotron">
-            <h1 class="title">{{ SiteName }}</h1>
-            <br />{{ Description }}
+		<div class="alert alert-danger">æª”æ¡ˆã€Œ{{FileName}}ã€ä¸Šå‚³å¤±æ•—ï¼Œå› ç‚º {{ErrInfo}}</div>
+            <h1 class="title">{{SiteName}} <small>{{Description}}</small></h1>
+			
             <p id='content'>
-            	<h1>¤W¶Ç¥¢±Ñ</h1><br />
-            	¿ù»~°T®§¡G {{ ErrInfo }}<br />
-            	<br />=
+            	<h3><span class="label label-danger">éŒ¯èª¤</span> {{FileName}}<h3><br />
+				{{ ErrInfo }}
+            	<br />
             </p>
         </div>
     </div>

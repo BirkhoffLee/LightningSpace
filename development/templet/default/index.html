@@ -1,11 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>{{ SiteName }}</title>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<title>{{SiteName}}</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
 <style>
 	body {
 		margin-top: 45px;
+		font-family:"ÂæÆËªüÊ≠£ÈªëÈ´î"
 	}
 	input {
 	    border: 1px solid #BBBBBB;
@@ -14,17 +16,33 @@
 	    -webkit-border-radius: 3px;
 	    border-radius: 3px;
 	}
+  .upload-btn{display:none !important; width:220px;height:220px}
+  .upload-wrap{position:relative;top:10px;left:10px;display:block; width:220px;height:220px;border-radius:50%;background:#22A2EB}
+  .upload-wrap:hover{top:0px;left:0px;display:block; width:240px;height:240px;
+    }
+  .upload-icon{position:relative;top:40px;left:8px}
+  .upload-wrap:hover > .upload-icon{top:50px;left:18px}
+  .upload{height:250px}
 </style>
 </head>
 <body>
+
 	<div class="container">
         <div class="jumbotron">
-            <h1 class="title">{{ SiteName }}</h1>
-            <br />{{ Description }}
+            <h1 class="title">{{SiteName}} <small>{{Description}}</small></h1>
             <p id='content'>
-            	<form method="post" enctype="multipart/form-data">
-					<span style="font-size:20px">§W∂«¿…Æ◊: </span><input type="file" name="file" id="file" /><br />
-					<input type="submit" value="¥£•Ê" />
+            	<form method="post" enctype="multipart/form-data" class="form-inline">
+				<div class="upload">
+					<label for="file">
+						<input class="upload-btn" type="file" name="file" id="file" />
+						<div class="upload-wrap">
+						<img class="upload-icon" src="http://i.imgur.com/zZ8emea.png">
+						</div>
+					</label>
+				</div>	
+					<br/>
+					<a href="index.html" class="btn btn-default"/>ÂèñÊ∂à</a>„ÄÄ
+					<input type="submit" value="‰∏äÂÇ≥" class="btn btn-primary"/>
 					<input type="hidden" name="action" id="action" value="upload" />
 				</form>
             </p>
