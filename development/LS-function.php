@@ -9,11 +9,21 @@
 class LightningSpace{
 
    /**
-    * 初始化模板系統
+    * 初始化系統(自動執行)
     *
     * @return void
     */
-  public static function mustache_init(){
+  function __construct(){
+    class_alias('LightningSpace', 'System');
+  }
+
+
+  /**
+    * 初始化系統
+    *
+    * @return void
+    */
+  public static function Initalize(){
     Mustache_Autoloader::register();
     $options =  array('extension' => '.html');
 
@@ -21,6 +31,133 @@ class LightningSpace{
     $m = new Mustache_Engine(array(
         'loader' => new Mustache_Loader_FilesystemLoader(LS_TEMPLET_DIR, $options),
     ));
+  }
+
+
+  /**
+    * 處理首頁內容
+    *
+    * @return void
+    */
+  public static function mainUI(){
+    if(defined('LS_UPLOADED') && LS_UPLOADED) {
+      $FileName = $LS_UPLOADED_FILE['FileName'];
+      $FileType = $LS_UPLOADED_FILE['FileType'];
+      $FileSize = $LS_UPLOADED_FILE['FileSize'];
+      $FileKey = $LS_UPLOADED_FILE['FileKey'];
+      self::render(
+        'uploaded',
+        array(
+          'SiteName' => LS_SITE_NAME,
+          'Description' => LS_DESCRIPTION,
+          'FileName' => $FileName,
+          'FileType' => $FileType,
+          'FileSize' => $FileSize,
+          'FileKey' => $FileKey,
+          'SiteURL' => LS_SITE_URL,
+        )
+      );
+    } else if(defined('LS_ERROR_CHECK') && LS_ERROR_CHECK) {
+      switch (LS_ERROR){
+        case 1:
+          $LS_ErrInfo = '檔案大小超出了伺服器上傳限制!';
+          break ;
+        case 2:
+          $LS_ErrInfo = '要上傳的檔案大小超出了你的瀏覽器限制!';
+          break ;
+        case 3:
+          $LS_ErrInfo = '檔案驗證失敗!';
+          break ;
+        case 4:
+          $LS_ErrInfo = '未找到上傳的檔案!';
+          break ;
+        case 5:
+          $LS_ErrInfo = '未找到上傳的檔案!';
+          break ;
+        case 6:
+          $LS_ErrInfo = '未找到上傳的檔案!';
+          break ;
+        case 7:
+          $LS_ErrInfo = '伺服器錯誤!';
+          break ;
+        case 8:
+          $LS_ErrInfo = '我不知道怎麼上傳...空氣。';
+          break ;
+        default:
+          $LS_ErrInfo = '未知錯誤!';
+          break ;
+      }
+      self::render(
+        'uploaderr',
+        array(
+          'SiteName' => LS_SITE_NAME,
+          'Description' => LS_DESCRIPTION,
+          'ErrInfo' => $LS_ErrInfo,
+          'FileName' => LS_ERROR_FILENAME
+        )
+      );
+    } else {
+      self::render(
+        'index',
+        array(
+          'SiteName' => LS_SITE_NAME,
+          'Description' => LS_DESCRIPTION
+        )
+      );
+    }
+  }
+
+
+  /**
+    * 檢查上傳
+    *
+    * @return void
+    */
+  public static function CheckUpload(){
+    if (isset($_POST['action'])){
+      if ($_POST['action'] == 'upload'){
+        if (isset($_GET['file'])){
+          if ($_FILES["file"]["error"] == 0){
+            if (self::CheckSafe($_FILES["file"]["name"])){
+                /*  產生檔案儲存金鑰  */
+                $key = $LightningSpace->RandomString(8) . '-' . rand(0,300000);
+
+                /*  產生下載鏈接金鑰  */
+                $webkey = base64_encode(json_encode(array(
+                  'key' => $key,
+                  'fn' => $_FILES["file"]["name"]
+                  )));
+
+                /*  移動檔案至特定資料夾、建立過期檢測檔案 */
+                self::mkdirs(LS_FILE_SAVE . $key);
+                move_uploaded_file($_FILES["file"]["tmp_name"], LS_FILE_SAVE . $key . '/' . $_FILES["file"]["name"]);
+
+                /*  記錄檔案詳細資訊  */
+                global $LS_UPLOADED_FILE;
+                $LS_UPLOADED_FILE = array(
+                  'FileName' => $_FILES["file"]["name"],
+                  'FileType' => $_FILES["file"]["type"],
+                  'FileSize' => round(($_FILES["file"]["size"] / 1024),2) . ' KB',
+                  'FileKey' => $webkey,
+                );
+                define('LS_UPLOADED', true);
+            } else {
+              define('LS_ERROR_CHECK', true);
+              define('LS_ERROR', 'InvalidFileType');
+              define('LS_ERROR_FILENAME', $_FILES["file"]["name"]);
+            }
+          } else {
+            define('LS_ERROR_CHECK', true);
+            define('LS_ERROR', $_FILES["file"]["error"]);
+            define('LS_ERROR_FILENAME', $_FILES["file"]["name"]);
+          }
+        } else {
+          define('LS_ERROR_CHECK', true);
+          define('LS_ERROR', 8);
+          define('LS_ERROR_FILENAME', 'The air');
+        }
+      }
+    }
   }
 
 
@@ -120,16 +257,16 @@ class LightningSpace{
 
 
   /**
-    * 返回 templet 的指定檔案內容
+    * 輸出 templet 的指定檔案內容
     *
     * @param  string  $file  檔案
     * @param  array   $array 參數
     *
-    * @return string
+    * @return void
     */
-  public static function Templet($file, $array){
+  public static function render($file, $array){
     global $m;
-    return $m->render($file, $array);
+    echo $m->render($file, $array);
   }
 
 
