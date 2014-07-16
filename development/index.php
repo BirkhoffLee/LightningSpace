@@ -9,7 +9,7 @@
 require 'LS-common.php';
 
 
-if(LS_UPLOADED) {
+if(defined('LS_UPLOADED') && LS_UPLOADED) {
 	$FileName = $LS_UPLOADED_FILE['FileName'];
 	$FileType = $LS_UPLOADED_FILE['FileType'];
 	$FileSize = $LS_UPLOADED_FILE['FileSize'];
@@ -22,12 +22,11 @@ if(LS_UPLOADED) {
 			'FileName' => $FileName,
 			'FileType' => $FileType,
 			'FileSize' => $FileSize,
-			'FileKey' => $FileKey
+			'FileKey' => $FileKey,
+			'SiteURL' => LS_SITE_URL,
 		)
 	);
-}
-
-if(LS_ERROR_CHECK) {
+} else if(LS_ERROR_CHECK) {
 	switch (LS_ERROR){
 		case 1:
 			$LS_ErrInfo = '檔案大小超出了伺服器上傳限制!';
@@ -63,12 +62,12 @@ if(LS_ERROR_CHECK) {
 			'FileName' => LS_ERROR_FILENAME
 		)
 	);
+} else {
+	echo $LightningSpace->Templet(
+		'index',
+		array(
+			'SiteName' => LS_SITE_NAME,
+			'Description' => LS_DESCRIPTION
+		)
+	);
 }
-
-echo $LightningSpace->Templet(
-	'index',
-	array(
-		'SiteName' => LS_SITE_NAME,
-		'Description' => LS_DESCRIPTION
-	)
-);

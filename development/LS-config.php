@@ -20,6 +20,12 @@ define('LS_ROOT', dirname(__FILE__));
 define('LS_DEBUG', true);
 
 /**
+ * Defines site's url.
+ * Please replace "mc.irkhoff.com/carbon-exploder-41"
+ */
+define('LS_SITE_URL', 'mc.irkhoff.com/carbon-exploder-41');
+
+/**
  * Defines the site name.
  * Please replace "LightningSpace"
  */

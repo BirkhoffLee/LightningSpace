@@ -32,7 +32,7 @@ class LightningSpace{
     * @return boolean
     */
   public static function mkdirs($dir){
-    return is_dir($dir) or (mkdirs(dirname($dir)) and mkdir($dir,0755));
+    return is_dir($dir) or (self::mkdirs(dirname($dir)) and mkdir($dir,0755));
   }
 
 

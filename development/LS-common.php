@@ -16,7 +16,6 @@ global $LightningSpace;
 $LightningSpace = new LightningSpace;
 $LightningSpace->mustache_init();
 $LightningSpace->CheckExpire(dirname(__FILE__) . LS_DOWNLOAD_TEMP);
-define('LS_UPLOADED', false);
 define('LS_ERROR_CHECK', false);
 
 /**
@@ -45,7 +44,7 @@ if (isset($_POST['action'])){
 						'FileName' => $_FILES["file"]["name"],
 						'FileType' => $_FILES["file"]["type"],
 						'FileSize' => round(($_FILES["file"]["size"] / 1024),2) . ' KB',
-						'Filekey' => $webkey,
+						'FileKey' => $webkey,
 					);
 					define('LS_UPLOADED', true);
 			} else {
