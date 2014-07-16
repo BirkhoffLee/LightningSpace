@@ -11,6 +11,8 @@ header('Content-Type: text/html; charset=utf-8');
 require 'LS-config.php';
 require 'LS-function.php';
 require 'Mustache/Autoloader.php';
+date_default_timezone_set("Asia/Taipei");
+set_exception_handler('errorHandler');
 
 global $LightningSpace;
 $LightningSpace = new LightningSpace;

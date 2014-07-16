@@ -132,4 +132,34 @@ class LightningSpace{
     return $m->render($file, $array);
   }
 
+
+  /**
+    * 記錄日誌
+    *
+    * @param  string  $string 內容
+    *
+    * @return string
+    */
+  public static function log($string){
+    self::mkdirs(LS_ROOT . '/' . LS_LOG_DIR);
+    $date = date('Y-m-d H:i:s');
+    $edate = base64_encode($date);
+    $fp = fopen(LS_ROOT . '/' . LS_LOG_DIR . "/$edate.txt", 'w');
+    fwrite($fp, $string . "\r\n\r\nTime: $date");
+    fclose($fp);
+    return $edate;
+  }
+
+}
+
+/**
+  * 錯誤管理(此函數為自動調用)
+  *
+  * @param  string  $msg  錯誤內容
+  *
+  * @return string
+  */
+function errorHandler($msg){
+  global $LightningSpace;
+  return '<h1>Error ID: ' . $LightningSpace->log($msg). '<br />Please give this ID to the site administrator. We are very apologize for this.</h1>';
 }

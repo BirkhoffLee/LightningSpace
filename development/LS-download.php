@@ -19,14 +19,8 @@ $webkey = base64_decode($argu);
 $webkey = json_decode($webkey, true);
 $key = $webkey['key'];
 $file = $webkey['fn'];
-
-if(!$key or !$file){
-	header('Location: index.php?404');
-	exit;
-}
-
 /* 防盜鏈臨時資料夾名稱 */
-$folder = LS_DOWNLOAD_TEMP . "uid-" . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '/' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000);
+$folder = LS_DOWNLOAD_TEMP . "/uid-" . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '/' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000) . '-' . rand(0,300000);
 
 /* 建立臨時資料夾、index.php */
 $LightningSpace->mkdirs($folder);
@@ -44,7 +38,7 @@ fwrite($fp, $contents);
 fclose($fp);
 
 /* 複製原始檔案到臨時資料夾 */
-copy(LS_FILE_SAVE . "$key/$file", "$folder/file");
+copy(LS_FILE_SAVE . "$key/$file", "$folder/file") or die(errorHandler('ERROR: Downloader exception: failed to copy the source files.'));
 chmod("$folder/file", 0755);
 
 /* 建立過期檢測檔案 */
@@ -52,5 +46,5 @@ $fp = fopen("$folder/expire.txt", 'w');
 fwrite($fp, time() + 172800);
 fclose($fp);
 
-header('Location: $folder');
+header("Location: ../$folder");
 exit;

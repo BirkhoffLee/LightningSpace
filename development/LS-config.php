@@ -60,6 +60,13 @@ define('LS_FILE_SIZE', '524288000');
 define('LS_DOWNLOAD_TEMP', 'downloading');
 
 /**
+ * Defines the directory which the log file save.
+ * Base directory is where you saved LS-config.php.
+ * Please replace "log"
+ */
+define('LS_LOG_DIR', 'log');
+
+/**
  * Defines the directory which the files save.
  * Base directory is where you saved LS-config.php.
  * Please replace "FileSystem/"
