@@ -1,3 +1,4 @@
+Options -Indexes
 RewriteEngine on
 RewriteRule download\/([a-zA-Z0-9\-]*) LS-download.php?argu=$1 [NC,L]
 RewriteRule FileSystem|Mustache|\.htaccess|log|LS-common\.php|LS-function\.php|LS-config\.php|FORBIDDEN - [F,L,NC]
