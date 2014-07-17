@@ -75,6 +75,23 @@ define('LS_LOG_DIR', 'log');
  */
 define('LS_FILE_SAVE', 'FileSystem/');
 
+/**
+ * Defines what I say when a upload error occurred.
+ * Please replace the string after => ' and before ',
+ *
+ * NOT RECOMMENDED REPLACEING.
+ */
+$LS_UPLOAD_ERROR_MSG = array(
+	'TooHeavyCausedbyServerINI' => '檔案大小超出了伺服器上傳限制!',
+	'TooHeavyCausedbyBrowser' => '上傳的檔案大小超出了你的瀏覽器限制!',
+	'CouldNotVerifyUploadedFile' => '檔案驗證失敗!',
+	'CannotFindUploadedFile' => '未找到上傳的檔案!',
+	'InternalServerError' => '伺服器錯誤!',
+	'NothingUploaded' => '我不知道怎麼上傳...空氣。',
+	'TooHeavy' => '這個好重...我搬不動! 超過大小限制 {{MaxSize}} 了!',
+	'default' => '未知錯誤!'
+	);
+
 
 //------------------------------------------------
 /**

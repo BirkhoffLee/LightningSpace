@@ -41,6 +41,7 @@ class LightningSpace{
     */
   public static function mainUI(){
     if(defined('LS_UPLOADED') && LS_UPLOADED) {
+      global $LS_UPLOADED_FILE;
       $FileName = $LS_UPLOADED_FILE['FileName'];
       $FileType = $LS_UPLOADED_FILE['FileType'];
       $FileSize = $LS_UPLOADED_FILE['FileSize'];
@@ -58,36 +59,37 @@ class LightningSpace{
         )
       );
     } else if(defined('LS_ERROR_CHECK') && LS_ERROR_CHECK) {
+      global $LS_UPLOAD_ERROR_MSG;
       switch (LS_ERROR){
         case 1:
-          $LS_ErrInfo = '檔案大小超出了伺服器上傳限制!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['TooHeavyCausedbyServerINI'];
           break ;
         case 2:
-          $LS_ErrInfo = '要上傳的檔案大小超出了你的瀏覽器限制!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['TooHeavyCausedbyBrowser'];
           break ;
         case 3:
-          $LS_ErrInfo = '檔案驗證失敗!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['CouldNotVerifyUploadedFile'];
           break ;
         case 4:
-          $LS_ErrInfo = '未找到上傳的檔案!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['CannotFindUploadedFile'];
           break ;
         case 5:
-          $LS_ErrInfo = '未找到上傳的檔案!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['CannotFindUploadedFile'];
           break ;
         case 6:
-          $LS_ErrInfo = '未找到上傳的檔案!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['CannotFindUploadedFile'];
           break ;
         case 7:
-          $LS_ErrInfo = '伺服器錯誤!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['InternalServerError'];
           break ;
         case 8:
-          $LS_ErrInfo = '我不知道怎麼上傳...空氣。';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['NothingUploaded'];
           break ;
         case 9:
-          $LS_ErrInfo = '這個好重...我搬不動! 超過大小限制 ' . self::bytesToSize(LS_FILE_SIZE) .  ' 了!';
+          $LS_ErrInfo = str_replace('{{MaxSize}}', self::bytesToSize(LS_FILE_SIZE),$LS_UPLOAD_ERROR_MSG['TooHeavy']);
           break ;
         default:
-          $LS_ErrInfo = '未知錯誤!';
+          $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['default'];
           break ;
       }
       self::render(
@@ -151,12 +153,12 @@ class LightningSpace{
   public static function CheckUpload(){
     if (isset($_POST['action'])){
       if ($_POST['action'] == 'upload'){
-        if (isset($_GET['file'])){
+        if (isset($_POST['file']) or $_FILES["file"]["size"] != 0){
           if ($_FILES["file"]["error"] == 0){
             if (self::CheckSafe($_FILES["file"]["name"])){
-                if(filesize($_FILES["file"]["name"]) > LS_FILE_SIZE){
+                if($_FILES["file"]["size"] < LS_FILE_SIZE){
                   /*  產生檔案儲存金鑰  */
-                  $key = $LightningSpace->RandomString(8) . '-' . rand(0,300000);
+                  $key = self::RandomString(8) . '-' . rand(0,300000);
 
                   /*  產生下載鏈接金鑰  */
                   $webkey = base64_encode(json_encode(array(
@@ -259,7 +261,7 @@ class LightningSpace{
               $handlec = fopen($filedir . '/expire.txt', "r");
               $contentsc = fread($handlec, filesize($filedir . '/expire.txt'));
               fclose($handlec);
-              if(time() > $contentsc) self::deleteDir($filedir);
+              if(time() > $contentsc) self::deleteDir(dirname($filedir));
           }
       }
   }

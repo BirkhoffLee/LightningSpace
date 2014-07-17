@@ -16,5 +16,5 @@ set_exception_handler('errorHandler');
 
 global $LightningSpace;
 $LightningSpace = new LightningSpace;
-System::CheckExpire(dirname(__FILE__) . LS_DOWNLOAD_TEMP);
+System::CheckExpire(dirname(__FILE__) . '/' . LS_DOWNLOAD_TEMP);
 System::CheckUpload();
