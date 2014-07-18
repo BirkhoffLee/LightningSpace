@@ -1,12 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>{{SiteName}}</title>
+<title>{{SiteName}}</title><meta charset="utf-8">
 <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
 <style>
 	body {
 		margin-top: 45px;
-		font-family:"微軟正黑體"
+		font-family:"Microsoft JhengHei"
 	}
 	input {
 	    border: 1px solid #BBBBBB;
@@ -18,16 +18,16 @@
 </style>
 </head>
 <body>
-	<div class="container">
+<div class="container">
         <div class="jumbotron">
-		<div class="alert-dismissable alert alert-success">檔案成功地上傳，感謝您的使用。
-		  <button type="button" class="close" data-dismiss="alert">x</button></div>
-            <h1 class="title">{{SiteName}} <small>{{Description}}</small></h1>
+		<div class="alert alert-success">檔案成功地上傳，感謝您的使用。
+		 </div>
+            <h1 class="title">{{ SiteName }} <small>{{ Description }}</small></h1>
             <p id='content'>
             	<h2>{{FileName}}</h2><br />
             	檔案類型: {{FileType}}<br />
-            	檔案大小: {{FileSize}}<br />
-            	檔案外鏈: <a href=http://{{SiteURL}}/download/{{FileKey}}>點我!</a><br />
+            	檔案大小: {{FileSize}}<br /><br />
+            	<a class="btn btn-primary" href="http://{{ SiteURL }}{{ FileKey }}">檔案外連</a><br />
             	<br />
             	
             </p>

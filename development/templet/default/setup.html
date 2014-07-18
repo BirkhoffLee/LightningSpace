@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>{{SiteName}}</title>
+  <meta charset="utf-8">
+<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
+<style>
+body{font-family:"Microsoft JhengHei"}
+.circle{background:#f39c12;width:500px;height:500px;border-radius:50%;margin:30px auto}
+.form-horizontal{position:relative;top:65px;left:110px}
+input.setup-input{width:60%}
+</style>
+</head>
+<body>
+<div class="circle">
+	<form class="form-horizontal">
+			<div class="form-group">
+			<label class="setup-label">您的硬碟名稱:</label>
+			<input class="form-control setup-input" id="inputSmall" type="text" required>
+		</div>
+		<div class="form-group">
+			<label class="setup-label">您的硬碟介紹:</label>
+			<input class="form-control setup-input" id="inputSmall" type="text" required>
+		</div>
+		<div class="form-group">
+			<label class="setup-label">本硬碟網址:</label>
+			<div class="input-group" style="width:60%">
+			<span class="input-group-addon">http://</span>
+			<input class="form-control setup-input" id="inputSmall" placeholder="" type="text" required>
+			<span class="input-group-addon">/</span>
+		</div></div>
+		<div class="form-group">
+			<label class="setup-label">單檔上傳限制:</label>
+			 <div class="input-group" style="width:60%">
+				<input class="form-control setup-input" id="inputSmall" placeholder="預設:524288000(500 MB)" type="text" required>
+				<span class="input-group-addon">Bytes</span>
+			</div>
+		</div>
+		<input style="position:relative;left:200px" type="submit" value="儲存設定" class="btn btn-primary"/>	
+	</form>	
+</div>
+</body>
+</html>
