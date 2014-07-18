@@ -27,10 +27,46 @@ class LightningSpace{
     Mustache_Autoloader::register();
     $options =  array('extension' => '.html');
 
-    global $m;
     $m = new Mustache_Engine(array(
         'loader' => new Mustache_Loader_FilesystemLoader(LS_TEMPLET_DIR, $options),
     ));
+
+    if(file_exists(LS_ROOT . '/data/install.lock')) define('LS_INSTALLED',true);
+  }
+
+
+  /**
+    * LightningSpace 安裝程式
+    *
+    * @return void
+    */
+  public static function Install(){
+    if(!defined('LS_INSTALLED') && !LS_DEBUG) {
+        switch ($_POST['step']) {
+          case 2:
+            self::render('setup');
+            break;
+          case 3:
+            if($error){
+              self::render(
+                'installerror',
+                array(
+                  'error' => $error
+                  ));
+            } else {
+              self::render(
+                'installed',
+                array(
+                  'siteurl' => LS_HOST . '/' . LS_ROOT_WWW));
+            }
+            break;
+          default:
+            self::render('start');
+            break;
+        }
+    } else {
+      self::render('installed');
+    }
   }
 
 

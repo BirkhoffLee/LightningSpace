@@ -91,10 +91,3 @@ $LS_UPLOAD_ERROR_MSG = array(
 	'TooHeavy' => '這個好重...我搬不動! 超過大小限制 {{MaxSize}} 了!',
 	'default' => '未知錯誤!'
 	);
-
-
-//------------------------------------------------
-/**
- * DO NOT TOUCH !
-*/
-define('LS_TEMPLET_DIR', 'templet/' . LS_TEMPLET_NAME);
