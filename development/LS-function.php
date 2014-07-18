@@ -27,6 +27,7 @@ class LightningSpace{
     Mustache_Autoloader::register();
     $options =  array('extension' => '.html');
 
+    global $m;
     $m = new Mustache_Engine(array(
         'loader' => new Mustache_Loader_FilesystemLoader(LS_TEMPLET_DIR, $options),
     ));
@@ -54,10 +55,7 @@ class LightningSpace{
                   'error' => $error
                   ));
             } else {
-              self::render(
-                'installed',
-                array(
-                  'siteurl' => LS_HOST . '/' . LS_ROOT_WWW));
+              self::render('installed');
             }
             break;
           default:
@@ -85,13 +83,10 @@ class LightningSpace{
       self::render(
         'uploaded',
         array(
-          'SiteName' => LS_SITE_NAME,
-          'Description' => LS_DESCRIPTION,
           'FileName' => $FileName,
           'FileType' => $FileType,
           'FileSize' => $FileSize,
-          'FileKey' => $FileKey,
-          'SiteURL' => LS_SITE_URL,
+          'FileKey' => $FileKey
         )
       );
     } else if(defined('LS_ERROR_CHECK') && LS_ERROR_CHECK) {
@@ -131,20 +126,12 @@ class LightningSpace{
       self::render(
         'uploaderr',
         array(
-          'SiteName' => LS_SITE_NAME,
-          'Description' => LS_DESCRIPTION,
           'ErrInfo' => $LS_ErrInfo,
           'FileName' => LS_ERROR_FILENAME
         )
       );
     } else {
-      self::render(
-        'index',
-        array(
-          'SiteName' => LS_SITE_NAME,
-          'Description' => LS_DESCRIPTION
-        )
-      );
+      self::render('index');
     }
   }
 
@@ -186,7 +173,7 @@ class LightningSpace{
     *
     * @return void
     */
-  public static function CheckUpload(){
+  public static function CheckUpload(){echo '123';
     if (isset($_POST['action'])){
       if ($_POST['action'] == 'upload'){
         if (isset($_POST['file']) or $_FILES["file"]["size"] != 0){
@@ -343,8 +330,14 @@ class LightningSpace{
     *
     * @return void
     */
-  public static function render($file, $array){
+  public static function render($file, $array = array()){
     global $m;
+    $array = array(
+          'SiteName' => LS_SITE_NAME,
+          'Description' => LS_DESCRIPTION,
+          'SiteURL' => LS_SITE_URL,
+          'templetURL' => LS_HOST . '/' . LS_ROOT_WWW . '/' . LS_TEMPLET_DIR
+          ) + $array;
     echo $m->render($file, $array);
   }
 
