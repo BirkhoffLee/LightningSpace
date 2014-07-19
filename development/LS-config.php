@@ -38,18 +38,19 @@ define('LS_DESCRIPTION', "You've never seen a great network disk system.");
 define('LS_TEMPLET_NAME', 'default');
 
 /**
- * Defines the largest file size(bytes) can be uploaded.
- * Default: 500 MB(524288000 bytes)
- * Please replace "524288000"
+ * Defines the largest file size(MB) can be uploaded.
+ * Please replace "1024"
+ *
+ * NOT RECOMMENDED FOR REPLACEING.
  */
-define('LS_FILE_SIZE', '524288000');
+define('LS_FILE_SIZE', '1024');
 
 /**
  * Defines the directory which the tempory file save.
  * Base directory is where you saved LS-config.php.
  * Please replace "/downloading"
  *
- * NOT RECOMMENDED REPLACEING.
+ * NOT RECOMMENDED FOR REPLACEING.
  */
 define('LS_DOWNLOAD_TEMP', 'downloading');
 
@@ -65,7 +66,7 @@ define('LS_LOG_DIR', 'log');
  * Base directory is where you saved LS-config.php.
  * Please replace "FileSystem/"
  *
- * NOT RECOMMENDED REPLACEING.
+ * NOT RECOMMENDED FOR REPLACEING.
  */
 define('LS_FILE_SAVE', 'FileSystem/');
 
@@ -73,7 +74,7 @@ define('LS_FILE_SAVE', 'FileSystem/');
  * Defines what I say when a upload error occurred.
  * Please replace the string after => ' and before ',
  *
- * NOT RECOMMENDED REPLACEING.
+ * NOT RECOMMENDED FOR REPLACEING.
  */
 $LS_UPLOAD_ERROR_MSG = array(
 	'TooHeavyCausedbyServerINI' => '檔案大小超出了伺服器上傳限制!',

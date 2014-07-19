@@ -117,7 +117,7 @@ class LightningSpace{
           $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['NothingUploaded'];
           break ;
         case 9:
-          $LS_ErrInfo = str_replace('{{MaxSize}}', self::bytesToSize(LS_FILE_SIZE),$LS_UPLOAD_ERROR_MSG['TooHeavy']);
+          $LS_ErrInfo = str_replace('{{MaxSize}}', LS_FILE_SIZE . ' MB',$LS_UPLOAD_ERROR_MSG['TooHeavy']);
           break ;
         default:
           $LS_ErrInfo = $LS_UPLOAD_ERROR_MSG['default'];
@@ -173,13 +173,13 @@ class LightningSpace{
     *
     * @return void
     */
-  public static function CheckUpload(){echo '123';
+  public static function CheckUpload(){
     if (isset($_POST['action'])){
       if ($_POST['action'] == 'upload'){
         if (isset($_POST['file']) or $_FILES["file"]["size"] != 0){
           if ($_FILES["file"]["error"] == 0){
             if (self::CheckSafe($_FILES["file"]["name"])){
-                if($_FILES["file"]["size"] < LS_FILE_SIZE){
+                if($_FILES["file"]["size"] < LS_FILE_SIZE * 1024 * 1024){
                   /*  產生檔案儲存金鑰  */
                   $key = self::RandomString(8) . '-' . rand(0,300000);
 
