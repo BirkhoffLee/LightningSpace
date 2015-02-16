@@ -31,40 +31,6 @@ class LightningSpace{
     $m = new Mustache_Engine(array(
         'loader' => new Mustache_Loader_FilesystemLoader(LS_TEMPLET_DIR, $options),
     ));
-
-    if(file_exists(LS_ROOT . '/data/install.lock')) define('LS_INSTALLED',true);
-  }
-
-
-  /**
-    * LightningSpace 安裝程式
-    *
-    * @return void
-    */
-  public static function Install(){
-    if(!defined('LS_INSTALLED') && !LS_DEBUG) {
-        switch (@$_POST['step']) {
-          case '2':
-            self::render('setup');
-            break;
-          case '3':
-            if($error){
-              self::render(
-                'installerror',
-                array(
-                  'error' => $error
-                  ));
-            } else {
-              self::render('installed');
-            }
-            break;
-          default:
-            self::render('start');
-            break;
-        }
-    } else {
-      self::render('installed');
-    }
   }
 
 
@@ -299,7 +265,7 @@ class LightningSpace{
     */
   public static function CheckSafe($file){
     $ext = pathinfo($file, PATHINFO_EXTENSION);
-    if ($ext == 'php' or $ext == 'asp' or $ext == 'aspx' or $ext == 'php' or $ext == 'jsp' or $ext == 'cgi'){
+    if ($ext == 'php' or $ext == 'asp' or $ext == 'aspx' or $ext == 'php2' or $ext == 'jsp' or $ext == 'cgi'){
       return false;
     } else return true;
   }
@@ -352,7 +318,7 @@ class LightningSpace{
   public static function log($string){
     self::mkdirs(LS_ROOT . '/' . LS_LOG_DIR);
     $date = date('Y-m-d H:i:s');
-    $edate = base64_encode($date);
+    $edate = md5(base64_encode($date));
     $fp = fopen(LS_ROOT . '/' . LS_LOG_DIR . "/$edate.txt", 'w');
     fwrite($fp, $string . "\r\n\r\nTime: $date");
     fclose($fp);
@@ -370,5 +336,5 @@ class LightningSpace{
   */
 function errorHandler($msg){
   global $LightningSpace;
-  return '<h1>Error ID: ' . $LightningSpace->log($msg). '<br />Please give this ID to the site administrator. We are very apologize for this.</h1>';
+  return '<h1>Error ID: ' . $LightningSpace->log($msg) . '<br />Please give this ID to the site administrator. We are very apologize for this.</h1>';
 }
