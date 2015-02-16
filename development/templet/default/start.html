@@ -10,13 +10,16 @@ body{font-family:"Microsoft JhengHei"}
 </style>
 </head>
 <body>
+<form method="post">
 <div class="circle">
 	<span style="font-size:65px;color:#FFF;position:relative;top:100px;left:80px">哈囉</span>
 	<span style="font-size:30px;color:#000;position:relative;top:70px;left:90px">歡迎使用</span>
 	<span style="font-size:30px;color:#000;position:relative;top:100px;left:-30px">LightningSpace</span>
 	<hr style="position:relative;top:130px;margin:30px">
+	<input type="hidden" value="2" id="step" name="step">
 	<span style="position:relative;top:130px;left:50px;color:#FFF;font-size:30px">讓我們開始吧！</span>
-	<a style="position:relative;top:170px;left:100px" href="setup.html" class="btn btn-primary">開始設定</a>
+	<input type="submit" style="position:relative;top:170px;left:100px" class="btn btn-primary" value="開始設定">
 </div>
+</form>
 </body>
 </html>

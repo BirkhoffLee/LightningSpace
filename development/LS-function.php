@@ -43,11 +43,11 @@ class LightningSpace{
     */
   public static function Install(){
     if(!defined('LS_INSTALLED') && !LS_DEBUG) {
-        switch ($_POST['step']) {
-          case 2:
+        switch (@$_POST['step']) {
+          case '2':
             self::render('setup');
             break;
-          case 3:
+          case '3':
             if($error){
               self::render(
                 'installerror',

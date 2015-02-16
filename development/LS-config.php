@@ -17,7 +17,7 @@ define('LS_ROOT', dirname(__FILE__));
  * Defines if in debug mode.
  * NO REPLACEING!
  */
-define('LS_DEBUG', true);
+define('LS_DEBUG', false);
 
 /**
  * Defines the site name.
